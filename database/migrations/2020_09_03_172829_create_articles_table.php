@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('description');
             $table->text('content');
             $table->string('image')->nullable();
-            $this->datetime('published_at')->nullable();
+            $table->dateTime('published_at')->nullable();
             $table->boolean('is_published')->default(1);
             $table->timestamps();
         });

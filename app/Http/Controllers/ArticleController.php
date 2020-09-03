@@ -15,7 +15,7 @@ class ArticleController extends Controller
     {
         $articles = \App\Article::with('category')
             ->select('id', 'category_id', 'title', 'slug', 'description', 'published_at')
-            ->where('is_published', 1)
+            ->onlyPublished()
             ->orderBy('published_at', 'desc')
             ->paginate(6);
 
@@ -51,12 +51,19 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $slug)
     {
-        //
+        $article = \App\Article::with('category')
+            ->bySlug($slug)
+            ->onlyPublished()
+            ->firstOrFail();
+
+        return response()->view('blog.show', [
+            'article' => $article,
+        ]);
     }
 
     /**

@@ -22,7 +22,7 @@
                                             {{ $article->published_at->format('d M Y, h:i') }}
                                         </div>
                                         <p class="card-text mb-4">{{ $article->description }}</p>
-                                        <a href="#">Continue reading</a>
+                                        <a href="{{ route('blog.show', $article->slug) }}">Continue reading</a>
                                     </div>
                                 </div>
                             @endforeach

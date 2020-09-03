@@ -39,4 +39,27 @@ class Article extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Scope a query to only include published articles.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOnlyPublished($query)
+    {
+        return $query->where('is_published', true);
+    }
+
+    /**
+     * Scope a query to only find the article with the slug.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $slug
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBySlug($query, string $slug)
+    {
+        return $query->where('slug', $slug);
+    }
 }

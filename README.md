@@ -1,4 +1,4 @@
-# Simply Laravel Blog with extra features
+# Simple Personal Laravel Blog with extra features
 
 ## The test task:
 

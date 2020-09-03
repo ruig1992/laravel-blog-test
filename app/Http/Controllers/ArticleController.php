@@ -28,6 +28,31 @@ class ArticleController extends Controller
     }
 
     /**
+     * Display a listing of the resource by the category.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByCategory(string $slug)
+    {
+        $selectedCategory = \App\Category::where('slug', $slug)->firstOrFail();
+
+        $articles = \App\Article::select('id', 'category_id', 'title', 'slug', 'description', 'published_at')
+            ->onlyPublished()
+            ->where('category_id', $selectedCategory->id)
+            ->orderBy('published_at', 'desc')
+            ->paginate(6);
+
+        $categories = \App\Category::orderBy('name')->get();
+
+        return response()->view('blog.index', [
+            'articles' => $articles,
+            'categories' => $categories,
+            'selectedCategory' => $selectedCategory,
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Articles list</h3>
-                        <a href="#" class="btn btn-primary">Create article</a>
+                        <a href="{{ route('admin.articles.create') }}" class="btn btn-primary">Create article</a>
                     </div>
 
                     <div class="card-body">

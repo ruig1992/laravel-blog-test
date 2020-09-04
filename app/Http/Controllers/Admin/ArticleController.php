@@ -32,7 +32,11 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $categories = \App\Category::orderBy('name')->get();
+
+        return response()->view('admin.articles.create', [
+            'categories' => $categories,
+        ]);
     }
 
     /**

@@ -24,8 +24,7 @@
                                         id="category"
                                         name="category_id"
                                 >
-                                    <option value=""
-                                            disable
+                                    <option value="" disabled
                                         {{ (old('category_id') ? '' : 'selected') }}
                                     >__Select the category__</option>
                                     @foreach($categories as $category)

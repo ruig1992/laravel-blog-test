@@ -29,7 +29,7 @@
                                         id="category"
                                         name="category_id"
                                 >
-                                    <option value="" disable>__Select the category__</option>
+                                    <option value="" disabled>__Select the category__</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}"
                                             {{ (old('category_id', $article->category_id) == $category->id ? 'selected' : '') }}

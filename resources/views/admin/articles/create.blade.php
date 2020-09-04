@@ -79,8 +79,7 @@
                                           id="content"
                                           name="content"
                                           rows="3"
-                                          value="{{ old('content') }}"
-                                ></textarea>
+                                >{{ old('content') }}</textarea>
                                 <span role="alert" class="invalid-feedback">
                                     <strong>{{ $errors->first('content') }}</strong>
                                 </span>

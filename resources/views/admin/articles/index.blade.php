@@ -30,7 +30,7 @@
                             @foreach($articles as $article)
                                 <tr>
                                     <td scope="row">
-                                        <a href="#" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="{{ route('admin.articles.edit', $article) }}" class="btn btn-sm btn-success">Edit</a>
                                         <form action="{{ route('admin.articles.destroy', $article) }}" method="POST">
                                             @csrf
                                             @method('DELETE')

@@ -78,24 +78,38 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Article $article
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        $categories = \App\Category::orderBy('name')->get();
+
+        return response()->view('admin.articles.edit', [
+            'article' => $article,
+            'categories' => $categories,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreBlogArticle $request
+     * @param Article $article
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(StoreBlogArticle $request, Article $article)
     {
-        //
+        $article->category_id = $request->get('category_id');
+        $article->title = $request->get('title');
+        $article->slug = Str::slug($request->get('title'));
+        $article->description = $request->get('description');
+        $article->content = $request->get('content');
+        $article->published_at = $request->get('published_at') ?? Carbon::now();
+        $article->is_published = $request->has('is_published');
+        $article->save();
+
+        return redirect()->route('admin.articles.edit', $article)->with('status', 'Article updated!');
     }
 
     /**

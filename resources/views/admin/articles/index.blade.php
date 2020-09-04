@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Admin articles list')
+
 @section('content')
     <div class="container">
         <div class="row">

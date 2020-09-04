@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@if($selectedCategory ?? null)
+    @section('title', $selectedCategory->name)
+@endif
+
 @section('content')
     <div class="container">
         <div class="row">

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Edit the article #{$article->id}")
+
 @section('content')
     <div class="container">
         <div class="row">

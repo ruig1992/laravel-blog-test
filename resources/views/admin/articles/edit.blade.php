@@ -9,20 +9,15 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Edit the article #{{ $article->id }}</h3>
-                    </div>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h3>Edit the article #{{ $article->id }}</h3>
+                        <a href="{{ route('blog.show', $article->slug) }}"
+                           class="btn btn-success"
+                           target="_blank"
+                        >View article</a>
+                    </div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.articles.update', $article) }}">

@@ -6,7 +6,6 @@ use App\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogArticle;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -19,8 +18,8 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = \App\Article::with('category')
-            ->select('id', 'category_id', 'title', 'slug', 'is_published', 'updated_at')
-            ->orderBy('updated_at', 'desc')
+            ->select('id', 'category_id', 'title', 'slug', 'is_published', 'created_at')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return response()->view('admin.articles.index', [

@@ -9,20 +9,11 @@
                         {{ session('status') }}
                     </div>
                 @endif
+
                 <div class="card">
                     <div class="card-header">
                         <h3>Create a new article</h3>
                     </div>
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.articles.store') }}">

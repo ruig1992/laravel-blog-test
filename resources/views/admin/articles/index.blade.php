@@ -23,19 +23,27 @@
                                     <th scope="col">Category</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Is published</th>
-                                    <th scope="col">Updated at</th>
+                                    <th scope="col">Created at</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($articles as $article)
                                 <tr>
                                     <td scope="row">
-                                        <a href="{{ route('admin.articles.edit', $article) }}" class="btn btn-sm btn-success">Edit</a>
-                                        <form action="{{ route('admin.articles.destroy', $article) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
+                                        <div class="d-flex">
+                                            <a href="{{ route('blog.show', $article->slug) }}"
+                                               class="btn btn-sm btn-success mr-2"
+                                               target="_blank"
+                                            >View</a>
+                                            <a href="{{ route('admin.articles.edit', $article) }}"
+                                               class="btn btn-sm btn-info mr-2"
+                                            >Edit</a>
+                                            <form action="{{ route('admin.articles.destroy', $article) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </div>
                                     </td>
                                     <td>{{ $article->category->name }}</td>
                                     <td>{{ $article->title }}</td>
@@ -50,7 +58,7 @@
                                             >&nbsp;</span>
                                         @endif
                                     </td>
-                                    <td>{{ $article->updated_at }}</td>
+                                    <td>{{ $article->created_at }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

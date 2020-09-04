@@ -29,7 +29,7 @@
                             <tbody>
                             @foreach($articles as $article)
                                 <tr>
-                                    <td scope="row">
+                                    <td>
                                         <div class="d-flex">
                                             <a href="{{ route('blog.show', $article->slug) }}"
                                                class="btn btn-sm btn-success mr-2"

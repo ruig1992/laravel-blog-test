@@ -18,7 +18,7 @@
                     <header class="mb-3">
                         <h1 class="h3">{{ $article->title }}</h1>
                         <p class="text-muted">
-                            {{ $article->published_at->format('d M Y, h:i') }}
+                            {{ $article->published_at->format('d M Y, H:i') }}
                         </p>
                     </header>
                     <p>{{ $article->description }}</p>

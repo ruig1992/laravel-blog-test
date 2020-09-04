@@ -21,7 +21,7 @@
                                         @endif
                                         <h2 class="h4 mb-2">{{ $article->title }}</h2>
                                         <div class="mb-3 text-muted">
-                                            {{ $article->published_at->format('d M Y, h:i') }}
+                                            {{ $article->published_at->format('d M Y, H:i') }}
                                         </div>
                                         <p class="card-text mb-4">{{ $article->description }}</p>
                                         <a href="{{ route('blog.show', $article->slug) }}">Continue reading</a>

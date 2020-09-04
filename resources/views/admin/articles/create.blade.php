@@ -20,8 +20,8 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.articles.store') }}">
                             @csrf
-                            <div class="form-group">
-                                <label for="category">Category</label>
+                            <div class="form-group required">
+                                <label for="category" class="admin-control-label">Category</label>
                                 <select class="form-control @if($errors->has('category_id'))is-invalid @endif"
                                         id="category"
                                         name="category_id"
@@ -39,8 +39,8 @@
                                     <strong>{{ $errors->first('category_id') }}</strong>
                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label for="title">Title</label>
+                            <div class="form-group required">
+                                <label for="title" class="admin-control-label">Title</label>
                                 <input type="text"
                                        class="form-control @if($errors->has('title'))is-invalid @endif"
                                        id="title"
@@ -52,8 +52,8 @@
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
+                            <div class="form-group required">
+                                <label for="description" class="admin-control-label">Description</label>
                                 <input type="text"
                                        class="form-control @if($errors->has('description'))is-invalid @endif"
                                        id="description"
@@ -65,8 +65,8 @@
                                     <strong>{{ $errors->first('description') }}</strong>
                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label for="content">Content</label>
+                            <div class="form-group required">
+                                <label for="content" class="admin-control-label">Content</label>
                                 <textarea class="form-control @if($errors->has('content'))is-invalid @endif"
                                           id="content"
                                           name="content"
@@ -77,13 +77,14 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label for="published_at">Published datetime</label>
+                                <label for="published_at" class="admin-control-label">Published datetime</label>
                                 <input type="text"
                                        class="form-control"
                                        id="published_at"
                                        name="published_at"
                                        value="{{ old('published_at') }}"
                                 >
+                                <small class="form-text text-muted">Setting automatically as current if it's empty</small>
                             </div>
                             <div class="form-check mb-4">
                                 <input type="checkbox"
@@ -93,7 +94,7 @@
                                        name="is_published"
                                        checked
                                 >
-                                <label class="form-check-label" for="is_published">Is published?</label>
+                                <label class="form-check-label admin-control-label" for="is_published">Is published?</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>

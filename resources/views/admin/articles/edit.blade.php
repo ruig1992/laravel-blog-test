@@ -87,6 +87,7 @@
                                        name="published_at"
                                        value="{{ old('published_at', $article->published_at) }}"
                                 >
+                                <small class="form-text text-muted">Setting automatically as current if it's empty</small>
                             </div>
                             <div class="form-check mb-4">
                                 <input type="checkbox"

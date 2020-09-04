@@ -10,3 +10,8 @@
 .admin-table-hover tbody tr:hover {
     background-color: rgba(216, 186, 3, .2);
 }
+.form-group.required .admin-control-label::after {
+    content: "*";
+    margin-left: 2px;
+    color: #f00;
+}

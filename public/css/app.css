@@ -10908,3 +10908,9 @@ a.text-dark:focus {
   background-color: rgba(216, 186, 3, 0.2);
 }
 
+.form-group.required .admin-control-label::after {
+  content: "*";
+  margin-left: 2px;
+  color: #f00;
+}
+

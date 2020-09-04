@@ -10904,3 +10904,7 @@ a.text-dark:focus {
   }
 }
 
+.admin-table-hover tbody tr:hover {
+  background-color: rgba(216, 186, 3, 0.2);
+}
+

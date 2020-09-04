@@ -14,7 +14,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return 'test';
+        $articles = \App\Article::with('category')
+            ->select('id', 'category_id', 'title', 'slug', 'is_published', 'updated_at')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
+
+        return response()->view('admin.articles.index', [
+            'articles' => $articles,
+        ]);
     }
 
     /**

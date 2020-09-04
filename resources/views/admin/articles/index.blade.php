@@ -4,6 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Articles list</h3>
@@ -26,7 +31,11 @@
                                 <tr>
                                     <td scope="row">
                                         <a href="#" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                        <form action="{{ route('admin.articles.destroy', $article) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                     <td>{{ $article->category->name }}</td>
                                     <td>{{ $article->title }}</td>

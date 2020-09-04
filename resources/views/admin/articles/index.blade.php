@@ -44,11 +44,11 @@
                                     <td>{{ $article->updated_at }}</td>
                                 </tr>
                             @endforeach
-                                <tr>
-                                    <td colspan="4">{{ $articles->links() }}</td>
-                                </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card-footer">
+                        {{ $articles->links() }}
                     </div>
                 </div>
             </div>

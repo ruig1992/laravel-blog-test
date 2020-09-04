@@ -66,12 +66,12 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Article $article
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        //
+        return redirect()->route('admin.articles.edit', $article);
     }
 
     /**
@@ -95,7 +95,7 @@ class ArticleController extends Controller
      *
      * @param StoreBlogArticle $request
      * @param Article $article
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(StoreBlogArticle $request, Article $article)
     {

@@ -17,4 +17,6 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
         Route::get('dashboard', 'ProfileController@index')->name('dashboard');
+
+        Route::resource('articles', 'ArticleController');
     });

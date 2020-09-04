@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBlogArticle;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -42,12 +45,23 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreBlogArticle $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreBlogArticle $request)
     {
-        //
+        $article = new Article([
+            'category_id' => $request->get('category_id'),
+            'title' => $request->get('title'),
+            'slug' => Str::slug($request->get('title')),
+            'description' => $request->get('description'),
+            'content' => $request->get('content'),
+            'published_at' => $request->get('published_at') ?? Carbon::now(),
+            'is_published' => $request->has('is_published'),
+        ]);
+        $article->save();
+
+        return redirect()->route('admin.articles.index')->with('status', 'Article created!');
     }
 
     /**

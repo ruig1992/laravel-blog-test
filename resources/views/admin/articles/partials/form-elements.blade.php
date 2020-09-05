@@ -45,6 +45,13 @@
     >{{ old('content', $article->content ?? null) }}</textarea>
     <span role="alert" class="invalid-feedback"><strong>{{ $errors->first('content') }}</strong></span>
 </div>
+
+@if(isset($article))
+    <div class="mx-3 my-4">
+        <random-image-search></random-image-search>
+    </div>
+@endif
+
 <div class="form-group">
     <label for="published_at" class="admin-control-label">Published datetime</label>
     <input type="text"

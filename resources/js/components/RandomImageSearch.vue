@@ -1,0 +1,53 @@
+<template>
+    <div class="random-image-search d-flex">
+        <div>
+            <button type="button"
+                    class="btn btn-secondary d-flex align-items-center w-100"
+            >
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>
+                <span class="ml-2">Search image</span>
+            </button>
+            <button type="button"
+                    class="btn btn-primary d-flex align-items-center mt-2 w-100"
+            >
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
+                </svg>
+                <span class="ml-2">Insert image</span>
+            </button>
+        </div>
+        <div class="random-image-search__img-preview-block">
+            <img v-if="imageUrl" class="img-fluid" :src="imageUrl" alt="Image">
+            <div class="text-center" v-else>
+                <p class="mb-2">
+                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-card-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                    </svg>
+                </p>
+                <p class="text-muted">No image? First find it - click "Search image"</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: {},
+        data() {
+            return {
+                imageUrl: '',
+            };
+        },
+        methods: {},
+    }
+</script>
+
+<style scoped>
+.random-image-search__img-preview-block {
+    width: 300px;
+    margin-left: 3rem;
+}
+</style>

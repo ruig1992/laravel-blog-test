@@ -1926,7 +1926,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['action', 'small', 'showLabel'],
+  props: {
+    action: {
+      type: String,
+      required: true
+    },
+    small: {
+      type: Boolean,
+      "default": false
+    },
+    showLabel: {
+      type: Boolean,
+      "default": false
+    }
+  },
   data: function data() {
     return {
       csrfToken: document.querySelector('meta[name="csrf-token"]').content

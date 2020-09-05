@@ -17,7 +17,11 @@
 
 <script>
     export default {
-        props: ['action', 'small', 'showLabel'],
+        props: {
+            action: { type: String, required: true },
+            small: { type: Boolean, default: false },
+            showLabel: { type: Boolean, default: false },
+        },
         data() {
             return {
                 csrfToken: document.querySelector('meta[name="csrf-token"]').content

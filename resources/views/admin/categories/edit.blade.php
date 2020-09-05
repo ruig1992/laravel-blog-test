@@ -18,7 +18,16 @@
                             @csrf
                             @method('PUT')
                             @include('admin.categories.partials.form-elements')
-                            @include('admin.partials.buttons.btn-save')
+
+                            <div class="d-flex">
+                                <div class="mr-2">
+                                    @include('admin.partials.buttons.btn-save')
+                                </div>
+                                <form-delete-action
+                                    action="{{ route('admin.categories.destroy', $category) }}"
+                                    show-label="true"
+                                ></form-delete-action>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -41,6 +41,7 @@
                                             ])
                                             <form-delete-action
                                                 action="{{ route('admin.articles.destroy', $article) }}"
+                                                small="true"
                                             ></form-delete-action>
                                         </div>
                                     </td>

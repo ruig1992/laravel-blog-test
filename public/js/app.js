@@ -1920,8 +1920,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['action'],
+  props: ['action', 'small', 'showLabel'],
   data: function data() {
     return {
       csrfToken: document.querySelector('meta[name="csrf-token"]').content
@@ -23573,7 +23578,11 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-sm btn-danger",
+          staticClass: "btn btn-danger",
+          class: {
+            "btn-sm": _vm.small,
+            "d-flex align-items-center": _vm.showLabel
+          },
           attrs: { type: "button" },
           on: { click: _vm.confirmDelete }
         },
@@ -23599,7 +23608,11 @@ var render = function() {
                 }
               })
             ]
-          )
+          ),
+          _vm._v(" "),
+          _vm.showLabel
+            ? _c("span", { staticClass: "ml-2" }, [_vm._v("Delete")])
+            : _vm._e()
         ]
       )
     ]

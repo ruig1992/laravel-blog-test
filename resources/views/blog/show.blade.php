@@ -4,16 +4,26 @@
 
 @section('content')
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blog</a></li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route('blog.indexByCategory', $article->category->slug) }}">
-                        {{ $article->category->name }}
-                    </a>
-                </li>
-            </ol>
-        </nav>
+        <div class="d-flex justify-content-between">
+            <div class="flex-grow-1 mr-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blog</a></li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('blog.indexByCategory', $article->category->slug) }}">
+                                {{ $article->category->name }}
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div>
+                @include('admin.partials.buttons.btn-edit', [
+                    'btnEditRoutePath' => route('admin.articles.edit', $article),
+                    'btnEditLabel' => 'Edit this article',
+                ])
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <article>

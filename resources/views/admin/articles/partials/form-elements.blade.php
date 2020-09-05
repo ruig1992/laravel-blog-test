@@ -8,7 +8,7 @@
 
         @foreach($categories as $category)
             <option value="{{ $category->id }}"
-                {{ (old('category_id', $article->category_id ?? null) == $category->id ? 'selected' : '') }}
+                {{ ( (old('category_id') ?: $article->category_id ?? null) == $category->id ? 'selected' : '') }}
             >{{ $category->name }}</option>
         @endforeach
     </select>
@@ -20,7 +20,7 @@
            class="form-control @if($errors->has('title'))is-invalid @endif"
            id="title"
            name="title"
-           value="{{ old('title', $article->title ?? null) }}"
+           value="{{ old('title') ?: $article->title ?? null }}"
            maxlength="255"
     >
     <span role="alert" class="invalid-feedback"><strong>{{ $errors->first('title') }}</strong></span>
@@ -31,7 +31,7 @@
            class="form-control @if($errors->has('description'))is-invalid @endif"
            id="description"
            name="description"
-           value="{{ old('description', $article->description ?? null) }}"
+           value="{{ old('description') ?: $article->description ?? null }}"
            maxlength="255"
     >
     <span role="alert" class="invalid-feedback"><strong>{{ $errors->first('description') }}</strong></span>
@@ -42,7 +42,7 @@
               id="content"
               name="content"
               rows="3"
-    >{{ old('content', $article->content ?? null) }}</textarea>
+    >{{ old('content') ?: $article->content ?? null }}</textarea>
     <span role="alert" class="invalid-feedback"><strong>{{ $errors->first('content') }}</strong></span>
 </div>
 <div class="form-group">
@@ -51,7 +51,7 @@
            class="form-control"
            id="published_at"
            name="published_at"
-           value="{{ old('published_at', $article->published_at ?? null) }}"
+           value="{{ old('published_at') ?: $article->published_at ?? null }}"
            placeholder="0000-00-00 00:00"
     >
     <small class="form-text text-muted">Setting automatically as current if it's empty</small>

@@ -2012,14 +2012,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   data: function data() {
     return {
-      imageUrl: ''
+      imageUrl: '',
+      searching: false
     };
   },
-  methods: {}
+  methods: {
+    handleImageSearch: function handleImageSearch() {
+      var _this = this;
+
+      this.imageUrl = '';
+      this.searching = true;
+      setTimeout(function () {
+        _this.imageUrl = 'https://www.cloudways.com/blog/wp-content/uploads/install-laravel-3.jpg';
+        _this.searching = false;
+      }, 2000);
+    },
+    insertImage: function insertImage() {//
+    }
+  }
 });
 
 /***/ }),
@@ -6456,7 +6479,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 300px;\n    margin-left: 3rem;\n}\n", ""]);
+exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 300px;\n    min-height: 170px;\n    margin-left: 3rem;\n}\n", ""]);
 
 // exports
 
@@ -24355,12 +24378,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "random-image-search d-flex" }, [
-    _c("div", [
+    _c("div", { staticClass: "random-image-search__buttons" }, [
       _c(
         "button",
         {
           staticClass: "btn btn-secondary d-flex align-items-center w-100",
-          attrs: { type: "button" }
+          attrs: { type: "button" },
+          on: { click: _vm.handleImageSearch }
         },
         [
           _c(
@@ -24402,7 +24426,8 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-primary d-flex align-items-center mt-2 w-100",
-          attrs: { type: "button" }
+          attrs: { type: "button" },
+          on: { click: _vm.insertImage }
         },
         [
           _c(
@@ -24439,7 +24464,8 @@ var render = function() {
             staticClass: "img-fluid",
             attrs: { src: _vm.imageUrl, alt: "Image" }
           })
-        : _c("div", { staticClass: "text-center" }, [
+        : !_vm.searching
+        ? _c("div", { staticClass: "pt-1 text-center" }, [
             _c("p", { staticClass: "mb-2" }, [
               _c(
                 "svg",
@@ -24469,10 +24495,35 @@ var render = function() {
               _vm._v('No image? First find it - click "Search image"')
             ])
           ])
+        : _c(
+            "div",
+            {
+              staticClass:
+                "d-flex flex-column align-items-center justify-content-center p-2"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("span", { staticClass: "mt-2 text-muted" }, [
+                _vm._v("Searching...")
+              ])
+            ]
+          )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "spinner-border", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Searching...")])]
+    )
+  }
+]
 render._withStripped = true
 
 

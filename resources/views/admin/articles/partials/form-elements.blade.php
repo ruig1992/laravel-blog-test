@@ -47,7 +47,7 @@
 </div>
 
 @if(isset($article))
-    <div class="mx-3 my-4">
+    <div class="mx-3 mt-4 mb-3">
         <random-image-search></random-image-search>
     </div>
 @endif

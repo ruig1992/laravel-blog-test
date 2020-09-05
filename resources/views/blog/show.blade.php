@@ -25,7 +25,7 @@
                     </header>
                     <p>{{ $article->description }}</p>
                     <hr>
-                    {{ $article->content }}
+                    {!! $article->content !!}
                 </article>
             </div>
         </div>

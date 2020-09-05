@@ -23,6 +23,7 @@ Vue.use(VueSweetalert2);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('form-delete-action', require('./components/FormDeleteAction.vue').default);
+Vue.component('content-editor', require('./components/ContentEditor.vue').default);
 Vue.component('random-image-search', require('./components/RandomImageSearch.vue').default);
 
 /**

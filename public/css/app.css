@@ -10904,6 +10904,12 @@ a.text-dark:focus {
   }
 }
 
+.blog-img-responsive {
+  max-width: 700px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
 .admin-table-hover tbody tr:hover {
   background-color: rgba(216, 186, 3, 0.2);
 }

@@ -18,8 +18,8 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::with('category')
-            ->select('id', 'category_id', 'title', 'slug', 'is_published', 'created_at')
-            ->orderBy('created_at', 'desc')
+            ->select('id', 'category_id', 'title', 'slug', 'is_published', 'published_at')
+            ->orderBy('published_at', 'desc')
             ->paginate(10);
 
         return response()->view('admin.articles.index', [

@@ -25,7 +25,7 @@
                                     <th scope="col">Category</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Is published</th>
-                                    <th scope="col">Created at</th>
+                                    <th scope="col">Published at</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,7 +54,7 @@
                                             <span class="badge badge-pill badge-danger" title="No">&nbsp;</span>
                                         @endif
                                     </td>
-                                    <td>{{ $article->created_at }}</td>
+                                    <td>{{ $article->published_at }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

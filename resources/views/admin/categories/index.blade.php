@@ -32,11 +32,9 @@
                                             <a href="{{ route('admin.categories.edit', $category) }}"
                                                class="btn btn-sm btn-info mr-2"
                                             >Edit</a>
-                                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-sm btn-danger">Delete</button>
-                                            </form>
+                                            <form-delete-action
+                                                action="{{ route('admin.categories.destroy', $category) }}"
+                                            ></form-delete-action>
                                         </div>
                                     </td>
                                     <td>{{ $category->name }}</td>

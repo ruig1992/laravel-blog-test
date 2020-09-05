@@ -7,6 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// SweetAlert2 styles
+@import '~sweetalert2/dist/sweetalert2.min.css';
+
 .admin-table-hover tbody tr:hover {
     background-color: rgba(216, 186, 3, .2);
 }

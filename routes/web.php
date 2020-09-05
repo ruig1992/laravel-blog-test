@@ -19,4 +19,5 @@ Route::middleware('auth')
         Route::get('dashboard', 'ProfileController@index')->name('dashboard');
 
         Route::resource('articles', 'ArticleController');
+        Route::resource('categories', 'CategoryController');
     });

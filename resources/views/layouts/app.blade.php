@@ -37,6 +37,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.articles.index') }}">Articles</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.categories.index') }}">Categories</a>
+                            </li>
                         @endauth
                     </ul>
 

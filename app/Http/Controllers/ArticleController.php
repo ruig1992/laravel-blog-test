@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Category;
+
 class ArticleController extends Controller
 {
     /**
@@ -11,13 +14,13 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = \App\Article::with('category')
+        $articles = Article::with('category')
             ->select('id', 'category_id', 'title', 'slug', 'description', 'published_at')
             ->onlyPublished()
             ->orderBy('published_at', 'desc')
             ->paginate(6);
 
-        $categories = \App\Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
         return response()->view('blog.index', [
             'articles' => $articles,
@@ -31,17 +34,17 @@ class ArticleController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function indexByCategory(string $slug)
+    public function byCategory(string $slug)
     {
-        $selectedCategory = \App\Category::where('slug', $slug)->firstOrFail();
+        $selectedCategory = Category::where('slug', $slug)->firstOrFail();
 
-        $articles = \App\Article::select('id', 'category_id', 'title', 'slug', 'description', 'published_at')
+        $articles = Article::select('id', 'category_id', 'title', 'slug', 'description', 'published_at')
             ->onlyPublished()
             ->where('category_id', $selectedCategory->id)
             ->orderBy('published_at', 'desc')
             ->paginate(6);
 
-        $categories = \App\Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
         return response()->view('blog.index', [
             'articles' => $articles,
@@ -58,7 +61,7 @@ class ArticleController extends Controller
      */
     public function show(string $slug)
     {
-        $article = \App\Article::with('category')
+        $article = Article::with('category')
             ->bySlug($slug)
             ->onlyPublished()
             ->firstOrFail();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogArticle;
 use Carbon\Carbon;
@@ -16,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = \App\Article::with('category')
+        $articles = Article::with('category')
             ->select('id', 'category_id', 'title', 'slug', 'is_published', 'created_at')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -33,7 +34,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = \App\Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
         return response()->view('admin.articles.create', [
             'categories' => $categories,
@@ -80,7 +81,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $categories = \App\Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
         return response()->view('admin.articles.edit', [
             'article' => $article,
@@ -112,8 +113,9 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Article $article
+     * @param Article $article
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Article $article)
     {

@@ -37,7 +37,7 @@
                                             ])
                                             <form-delete-action
                                                 action="{{ route('admin.categories.destroy', $category) }}"
-                                                small="true"
+                                                :small="true"
                                             ></form-delete-action>
                                         </div>
                                     </td>

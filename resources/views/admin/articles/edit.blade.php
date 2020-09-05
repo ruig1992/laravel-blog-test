@@ -29,7 +29,7 @@
                                 </div>
                                 <form-delete-action
                                     action="{{ route('admin.articles.destroy', $article) }}"
-                                    show-label="true"
+                                    :show-label="true"
                                 ></form-delete-action>
                             </div>
                         </form>

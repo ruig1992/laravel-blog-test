@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="form-group" :class="{'required': required}">
+        <label :for="id" class="admin-control-label">{{ label }}</label>
         <textarea class="form-control"
                   :class="{'is-invalid': isInvalid}"
                   :id="id"
@@ -9,9 +10,7 @@
         ></textarea>
         <span role="alert" class="invalid-feedback"><strong>{{ errorMsg }}</strong></span>
 
-        <div class="mx-3 mt-4 mb-3">
-            <random-image-search @insert-image="insertImage"></random-image-search>
-        </div>
+        <slot name="extra" :insertImage="insertImage"></slot>
     </div>
 </template>
 
@@ -20,6 +19,8 @@ export default {
     props: {
         id: { type: String, required: true },
         name: { type: String, required: true },
+        label: { type: String, required: true },
+        required: { type: Boolean, default: false },
         isInvalid: { type: Boolean, default: false },
         errorMsg: { type: String, default: '' },
         value: { required: false, type: String, default: '' },

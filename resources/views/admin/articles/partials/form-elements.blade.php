@@ -36,22 +36,24 @@
     >
     <span role="alert" class="invalid-feedback"><strong>{{ $errors->first('description') }}</strong></span>
 </div>
-<div class="form-group required">
-    <label for="content" class="admin-control-label">Content</label>
 
-    <content-editor
-        id="content"
-        name="content"
-        :is-invalid="{{ $errors->has('content') ? 'true' : 'false' }}"
-        error-msg="{{ $errors->first('content') }}"
-    >{{ old('content') ?: $article->content ?? null }}</content-editor>
-
-{{--    @if(isset($article))--}}
-{{--        <div class="mx-3 mt-4 mb-3">--}}
-{{--            <random-image-search></random-image-search>--}}
-{{--        </div>--}}
-{{--    @endif--}}
-</div>
+<content-editor
+    id="content"
+    name="content"
+    label="Content"
+    :required="true"
+    :is-invalid="{{ $errors->has('content') ? 'true' : 'false' }}"
+    error-msg="{{ $errors->first('content') }}"
+    value="{{ old('content') ?: $article->content ?? null }}"
+>
+    <template v-slot:extra="slotProps">
+        @if(isset($article))
+            <div class="mx-3 mt-4 mb-3">
+                <random-image-search @insert-image="slotProps.insertImage"></random-image-search>
+            </div>
+        @endif
+    </template>
+</content-editor>
 
 <div class="form-group">
     <label for="published_at" class="admin-control-label">Published datetime</label>

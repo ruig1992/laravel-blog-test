@@ -1924,7 +1924,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     id: {
@@ -1934,6 +1933,14 @@ __webpack_require__.r(__webpack_exports__);
     name: {
       type: String,
       required: true
+    },
+    label: {
+      type: String,
+      required: true
+    },
+    required: {
+      type: Boolean,
+      "default": false
     },
     isInvalid: {
       type: Boolean,
@@ -24375,41 +24382,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("textarea", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.currentValue,
-          expression: "currentValue"
-        }
-      ],
-      staticClass: "form-control",
-      class: { "is-invalid": _vm.isInvalid },
-      attrs: { id: _vm.id, name: _vm.name, rows: "5" },
-      domProps: { value: _vm.currentValue },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _c(
+    "div",
+    { staticClass: "form-group", class: { required: _vm.required } },
+    [
+      _c(
+        "label",
+        { staticClass: "admin-control-label", attrs: { for: _vm.id } },
+        [_vm._v(_vm._s(_vm.label))]
+      ),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.currentValue,
+            expression: "currentValue"
           }
-          _vm.currentValue = $event.target.value
+        ],
+        staticClass: "form-control",
+        class: { "is-invalid": _vm.isInvalid },
+        attrs: { id: _vm.id, name: _vm.name, rows: "5" },
+        domProps: { value: _vm.currentValue },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.currentValue = $event.target.value
+          }
         }
-      }
-    }),
-    _vm._v(" "),
-    _c("span", { staticClass: "invalid-feedback", attrs: { role: "alert" } }, [
-      _c("strong", [_vm._v(_vm._s(_vm.errorMsg))])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "mx-3 mt-4 mb-3" },
-      [_c("random-image-search", { on: { "insert-image": _vm.insertImage } })],
-      1
-    )
-  ])
+      }),
+      _vm._v(" "),
+      _c(
+        "span",
+        { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+        [_c("strong", [_vm._v(_vm._s(_vm.errorMsg))])]
+      ),
+      _vm._v(" "),
+      _vm._t("extra", null, { insertImage: _vm.insertImage })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

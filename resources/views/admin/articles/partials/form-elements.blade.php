@@ -52,6 +52,7 @@
            id="published_at"
            name="published_at"
            value="{{ old('published_at', $article->published_at ?? null) }}"
+           placeholder="0000-00-00 00:00"
     >
     <small class="form-text text-muted">Setting automatically as current if it's empty</small>
 </div>

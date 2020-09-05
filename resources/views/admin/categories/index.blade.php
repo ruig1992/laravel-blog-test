@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex">
-                                            @include('admin.partials.buttons.btn-edit', [
+                                            @include('admin.partials.buttons.btn-edit-small', [
                                                 'btnEditRoutePath' => route('admin.categories.edit', $category),
                                             ])
                                             <form-delete-action

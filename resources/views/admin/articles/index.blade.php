@@ -36,7 +36,7 @@
                                             @include('admin.partials.buttons.btn-view-small', [
                                                 'btnViewRoutePath' => route('blog.show', $article->slug),
                                             ])
-                                            @include('admin.partials.buttons.btn-edit', [
+                                            @include('admin.partials.buttons.btn-edit-small', [
                                                 'btnEditRoutePath' => route('admin.articles.edit', $article),
                                             ])
                                             <form-delete-action

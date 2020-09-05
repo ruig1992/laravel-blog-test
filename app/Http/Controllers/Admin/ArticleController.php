@@ -6,7 +6,6 @@ use App\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogArticle;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -52,7 +51,6 @@ class ArticleController extends Controller
         $article = new Article([
             'category_id' => $request->get('category_id'),
             'title' => $request->get('title'),
-            'slug' => Str::slug($request->get('title')),
             'description' => $request->get('description'),
             'content' => $request->get('content'),
             'published_at' => $request->get('published_at') ?? Carbon::now(),
@@ -101,7 +99,7 @@ class ArticleController extends Controller
     {
         $article->category_id = $request->get('category_id');
         $article->title = $request->get('title');
-        $article->slug = Str::slug($request->get('title'));
+        //$article->slug = Str::slug($request->get('title'));
         $article->description = $request->get('description');
         $article->content = $request->get('content');
         $article->published_at = $request->get('published_at') ?? Carbon::now();

@@ -25,7 +25,7 @@ class StoreBlogArticle extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'title' => "required|unique:articles,title,{($this->article->id ?? 0)}",
+            'title' => "required|max:255",
             'description' => 'required|max:255',
             'content' => 'required',
             'published_at' => 'nullable|date',

@@ -59,7 +59,7 @@ class ArticleController extends Controller
         ]);
         $article->save();
 
-        return redirect()->route('admin.articles.index')->with('status', 'Article created!');
+        return redirect()->route('admin.articles.index')->with('status_success', 'Article created!');
     }
 
     /**
@@ -106,7 +106,7 @@ class ArticleController extends Controller
         $article->is_published = $request->has('is_published');
         $article->save();
 
-        return redirect()->route('admin.articles.edit', $article)->with('status', 'Article updated!');
+        return redirect()->route('admin.articles.edit', $article)->with('status_success', 'Article updated!');
     }
 
     /**
@@ -118,8 +118,13 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $article->delete();
+        try {
+            $article->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('admin.articles.index')
+                ->with('status_error', 'Failed to delete article!');
+        }
 
-        return redirect()->route('admin.articles.index')->with('status', 'Article deleted!');
+        return redirect()->route('admin.articles.index')->with('status_success', 'Article deleted!');
     }
 }

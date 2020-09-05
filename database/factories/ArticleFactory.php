@@ -8,17 +8,14 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Article::class, function (Faker $faker) {
-    $title = $faker->sentence(6);
-
     return [
         'category_id' => random_int(1, 3),
-        'title' => $title,
-        'slug' => Str::slug($title),
+        'title' => $faker->sentence(6),
         'description' => $faker->paragraph(1),
-        'content' => $faker->text(600),
+        'content' => '<p>' . $faker->text(600) . '</p>',
         'published_at' => Carbon::now()
             ->subDays(random_int(1, 7))
-            ->subHours(random_int(1, 10))
+            ->subHours(random_int(1, 3))
             ->format('Y-m-d H:i:s'),
         'is_published' => random_int(0, 1),
     ];

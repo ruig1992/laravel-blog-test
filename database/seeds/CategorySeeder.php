@@ -13,24 +13,26 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        $dtNow = Carbon::now()->format('Y-m-d H:i:s');
+
         DB::table('categories')->insert([
             [
                 'name' => 'Programming',
                 'slug' => 'programming',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_at' => $dtNow,
+                'updated_at' => $dtNow,
             ],
             [
-                'name' => 'Sport',
-                'slug' => 'sport',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'name' => 'Football',
+                'slug' => 'football',
+                'created_at' => $dtNow,
+                'updated_at' => $dtNow,
             ],
             [
                 'name' => 'Nature',
                 'slug' => 'nature',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'created_at' => $dtNow,
+                'updated_at' => $dtNow,
             ],
         ]);
     }

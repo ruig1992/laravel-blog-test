@@ -11,10 +11,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Edit the article #{{ $article->id }}</h3>
-                        <a href="{{ route('blog.show', $article->slug) }}"
-                           class="btn btn-success"
-                           target="_blank"
-                        >View article</a>
+                        @include('admin.partials.buttons.btn-view', [
+                            'btnViewRoutePath' => route('blog.show', $article->slug),
+                            'btnViewLabel' => 'View article',
+                        ])
                     </div>
 
                     <div class="card-body">
@@ -22,8 +22,7 @@
                             @csrf
                             @method('PUT')
                             @include('admin.articles.partials.form-elements')
-
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            @include('admin.partials.buttons.btn-save')
                         </form>
                     </div>
                 </div>

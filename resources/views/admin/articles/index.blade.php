@@ -11,7 +11,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Articles list</h3>
-                        <a href="{{ route('admin.articles.create') }}" class="btn btn-primary">Create article</a>
+                        @include('admin.partials.buttons.btn-create', [
+                            'btnCreateRouteName' => 'admin.articles.create',
+                            'btnCreateLabel' => 'Create article',
+                        ])
                     </div>
 
                     <div class="card-body">
@@ -30,13 +33,12 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('blog.show', $article->slug) }}"
-                                               class="btn btn-sm btn-success mr-2"
-                                               target="_blank"
-                                            >View</a>
-                                            <a href="{{ route('admin.articles.edit', $article) }}"
-                                               class="btn btn-sm btn-info mr-2"
-                                            >Edit</a>
+                                            @include('admin.partials.buttons.btn-view-small', [
+                                                'btnViewRoutePath' => route('blog.show', $article->slug),
+                                            ])
+                                            @include('admin.partials.buttons.btn-edit', [
+                                                'btnEditRoutePath' => route('admin.articles.edit', $article),
+                                            ])
                                             <form-delete-action
                                                 action="{{ route('admin.articles.destroy', $article) }}"
                                             ></form-delete-action>
@@ -46,13 +48,9 @@
                                     <td>{{ $article->title }}</td>
                                     <td class="text-center">
                                         @if($article->is_published)
-                                            <span class="badge badge-pill badge-success"
-                                                  title="Yes"
-                                            >&nbsp;</span>
+                                            <span class="badge badge-pill badge-success" title="Yes">&nbsp;</span>
                                         @else
-                                            <span class="badge badge-pill badge-danger"
-                                                  title="No"
-                                            >&nbsp;</span>
+                                            <span class="badge badge-pill badge-danger" title="No">&nbsp;</span>
                                         @endif
                                     </td>
                                     <td>{{ $article->created_at }}</td>

@@ -11,7 +11,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Categories list</h3>
-                        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Create category</a>
+                        @include('admin.partials.buttons.btn-create', [
+                            'btnCreateRouteName' => 'admin.categories.create',
+                            'btnCreateLabel' => 'Create category',
+                        ])
                     </div>
 
                     <div class="card-body">
@@ -29,9 +32,9 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('admin.categories.edit', $category) }}"
-                                               class="btn btn-sm btn-info mr-2"
-                                            >Edit</a>
+                                            @include('admin.partials.buttons.btn-edit', [
+                                                'btnEditRoutePath' => route('admin.categories.edit', $category),
+                                            ])
                                             <form-delete-action
                                                 action="{{ route('admin.categories.destroy', $category) }}"
                                             ></form-delete-action>

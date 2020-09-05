@@ -17,8 +17,7 @@
                         <form method="POST" action="{{ route('admin.categories.store') }}">
                             @csrf
                             @include('admin.categories.partials.form-elements')
-
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            @include('admin.partials.buttons.btn-save')
                         </form>
                     </div>
                 </div>

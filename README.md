@@ -13,8 +13,26 @@
 
 So in the end there should be 3 branches: `image_buttons <- laravel_blog <- master`
 
----
-
 Please use Laravel tools as much as possible.
 
 Provide the result as a git repository (in github or bitbucket).
+
+---
+
+### To start the project run the following commands:
+
+```
+composer install
+cp .env.example .env
+php artisan key:generate
+
+php artisan migrate --seed  or  php artisan migrate:refresh --seed
+
+npm install && npm run dev
+```
+
+After that run ```php artisan serve``` and open in the browser http://localhost:8000/
+
+For login as **Blog user** open http://localhost:8000/login and in the Login form enter:
+
+login - *test@test.com* and password - *password*

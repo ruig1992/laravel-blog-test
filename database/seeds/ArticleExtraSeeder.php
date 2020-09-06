@@ -16,17 +16,17 @@ class ArticleExtraSeeder extends Seeder
     {
         $dtNow = Carbon::now()->format('Y-m-d H:i:s');
 
-        $title1 = 'Common species mirror rare animals response to global change';
-        $title2 = 'Молодіжна збірна України U-21 вирушила до Фінляндії на матч кваліфікації Євро-2021';
-        $title3 = 'PHP 8.0.0 Beta 3 available for testing';
+        $title1 = 'Why we don’t really know how many lions live in Africa';
+        $title2 = 'Мессі офіційно залишається у "Барселоні"';
+        $title3 = '[bvblogic] - a technology development company from Ivano-Frankivsk';
 
         DB::table('articles')->insert([
             [
                 'category_id' => 3, // Nature
                 'title' => $title1,
                 'slug' => Str::slug($title1),
-                'description' => 'The populations of common animals are just as likely to rise or fall in number in a time of accelerating global change as those of rare species, a study suggests.',
-                'content' => '<p>A study of more than 2,000 species reveals animal populations around the world -- from the very common to endangered species -- are going up and down as global change alters land, sea and freshwater ecosystems.</p><p>The findings highlight a need to look beyond only rare species in order to improve efforts to conserve global biodiversity, scientists say.</p><p>Critically endangered animals -- such as the Hawksbill sea turtle -- were previously thought to be at greater risk of decline than common species like red deer, but the study found a wide spectrum of changes in animal numbers.</p>',
+                'description' => 'Counting lions is surprisingly complicated, but a new method promises more accuracy and detail, scientists say.',
+                'content' => "<p>A lioness rests in the fork of a tree in Uganda’s Queen Elizabeth National Park. With lion numbers rapidly depleting, researchers say it’s crucial to have clear and accurate population estimates to help guide conservation efforts.</p><p>Lions have experienced a shocking decline; that much is clear. They’ve disappeared from well over 90 percent of their historic range in Africa in the last 120 years. And in the past quarter century alone, their population has declined by about half.</p><p>But just how many lions are left in Africa? The answer is surprisingly fuzzy. The most commonly cited estimate is 20,000, but many lion researchers aren’t entirely comfortable with that number.</p>",
                 'is_published' => 1,
                 'published_at' => Carbon::now()->subHours(2)->format('Y-m-d H:i:s'),
                 'created_at' => $dtNow,
@@ -38,8 +38,8 @@ class ArticleExtraSeeder extends Seeder
                 'category_id' => 2, // Football
                 'title' => $title2,
                 'slug' => Str::slug($title2),
-                'description' => 'У вівторок, 8 вересня, у Гельсінкі підопічні Руслана Ротаня зіграють черговий матч відбірного турніру чемпіонату Європи.',
-                'content' => '<p>Сьогодні, 5 вересня о 10.00 чартерним рейсом молодіжна збірна України вирушила з Данії до Фінляндії. У Гельсінкі проти місцевої збірної синьо-жовті проведуть наступний матч відбору до Євро-2021 (U-21).</p><p>По обіді в підопічних Руслана Ротаня заплановано тренування відновлювального характеру. Нагадаємо, що матч проти збірної Фінляндії відбудеться 8 вересня на Олімпійському стадіоні (початок — о 19.00 за Києвом).</p>',
+                'description' => 'Лідер "Барселони" Ліонель Мессі залишитися у каталонському клубі. Зірковий аргентинський футболіст передумав покидати "Барселону".',
+                'content' => '<p>"Я був нещасливий і хотів піти. Мені не дозволили це зробити, і я залишаюся в клубі, щоб не вступати в юридичний конлфікт. Керівництво клубу на чолі з Бартомеу – катастрофа", – заявив Лео.</p><p>Marca пише, що 33-річний Мессі не хоче покидати "Барселону" з конфліктом.</p>',
                 'is_published' => 1,
                 'published_at' => Carbon::now()->subHours(1)->format('Y-m-d H:i:s'),
                 'created_at' => $dtNow,
@@ -51,8 +51,8 @@ class ArticleExtraSeeder extends Seeder
                 'category_id' => 1, // Programming
                 'title' => $title3,
                 'slug' => Str::slug($title3),
-                'description' => 'The PHP team is pleased to announce the sixth testing release of PHP 8.0.0, Beta 3. This continues the PHP 8.0 release cycle, the rough outline of which is specified in the PHP Wiki.',
-                'content' => '<p>For source downloads of PHP 8.0.0 Beta 3 please visit the download page.</p><p>Please carefully test this version and report any issues found in the bug reporting system.</p><p>Please DO NOT use this version in production, it is an early test version.</p><p>For more information on the new features and other changes, you can read the NEWS file, or the UPGRADING file for a complete list of upgrading notes. These files can also be found in the release archive.</p><p>The next release will be the Release Candidate 1, planned for Sep 17 2020.</p><p>The signatures for the release can be found in the manifest or on the QA site.</p><p>Thank you for helping us make PHP better.</p>',
+                'description' => 'We develop and implement efficient IT solutions in six key domains: Agriculture, Logistics, and Transportation, eCommerce, eTickets, Retail and FMCG, Marketing and Advertising.',
+                'content' => '<p>[bvblogic] creates progressive software with the use of disruptive technologies and intellectual approaches of Data Science, Artificial Intelligence, Machine Learning, and Deep Learning.</p><p>Using the innovations, we help our clients to become more innovative and to successfully achieve their goals.</p><p>We began our operations in 2008 from the small group of developers. Currently, we have evolved into one of the regional leaders serving more than 500 clients all over the world. We have already successfully implemented more than 800 projects in various industries and technological areas.</p><p>Our development centers are located in Ukraine: Ivano-Frankivsk, Sumy, and Chernivtsi.</p>',
                 'is_published' => 1,
                 'published_at' => $dtNow,
                 'created_at' => $dtNow,

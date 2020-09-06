@@ -11,10 +11,12 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Edit the article #{{ $article->id }}</h3>
-                        @include('admin.partials.buttons.btn-view', [
-                            'btnViewRoutePath' => route('blog.show', $article->slug),
-                            'btnViewLabel' => 'View article',
-                        ])
+                        @if($article->is_published)
+                            @include('admin.partials.buttons.btn-view', [
+                                'btnViewRoutePath' => route('blog.show', $article->slug),
+                                'btnViewLabel' => 'View article',
+                            ])
+                        @endif
                     </div>
 
                     <div class="card-body">

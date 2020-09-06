@@ -2122,6 +2122,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6615,7 +6618,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 370px;\n    min-height: 200px;\n    margin: 0 3rem;\n    text-align: center;\n    overflow: hidden;\n}\n.random-image-search__img[data-v-82877976] {\n    max-height: 200px;\n    width: auto;\n}\n", ""]);
+exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 370px;\n    min-height: 270px;\n    margin: 0 3rem;\n    text-align: center;\n    overflow: hidden;\n}\n.random-image-search__img[data-v-82877976] {\n    max-height: 200px;\n    width: auto;\n}\n", ""]);
 
 // exports
 
@@ -24667,17 +24670,21 @@ var render = function() {
         _c(
           "label",
           { staticClass: "form-check-label", attrs: { for: "with_cache" } },
-          [_vm._v("With cache")]
+          [_vm._v("Enable cache")]
         )
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "random-image-search__img-preview-block" }, [
       _vm.image
-        ? _c("img", {
-            staticClass: "random-image-search__img",
-            attrs: { src: _vm.image.src, alt: "Image" }
-          })
+        ? _c("div", [
+            _c("img", {
+              staticClass: "random-image-search__img",
+              attrs: { src: _vm.image.src, alt: "Image" }
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
         : !_vm.searching
         ? _c("div", { staticClass: "pt-1 text-center" }, [
             _c("p", { staticClass: "mb-2" }, [
@@ -24728,7 +24735,7 @@ var render = function() {
                 "d-flex flex-column align-items-center justify-content-center p-2"
             },
             [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("span", { staticClass: "mt-2 text-muted" }, [
                 _vm._v("Searching...")
@@ -24778,6 +24785,16 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-muted mt-2" }, [
+      _vm._v("Didn't find what you were looking for - "),
+      _c("br"),
+      _vm._v('click "Search image" again')
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

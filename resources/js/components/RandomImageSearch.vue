@@ -17,12 +17,15 @@
                        id="with_cache"
                        v-model="cacheEnabled"
                 >
-                <label class="form-check-label" for="with_cache">With cache</label>
+                <label class="form-check-label" for="with_cache">Enable cache</label>
             </div>
         </div>
 
         <div class="random-image-search__img-preview-block">
-            <img v-if="image" class="random-image-search__img" :src="image.src" alt="Image">
+            <div v-if="image">
+                <img class="random-image-search__img" :src="image.src" alt="Image">
+                <p class="text-muted mt-2">Didn't find what you were looking for - <br>click "Search image" again</p>
+            </div>
 
             <div class="pt-1 text-center" v-else-if="!searching">
                 <p class="mb-2">
@@ -124,7 +127,7 @@
 <style scoped>
 .random-image-search__img-preview-block {
     width: 370px;
-    min-height: 200px;
+    min-height: 270px;
     margin: 0 3rem;
     text-align: center;
     overflow: hidden;

@@ -17,12 +17,14 @@
                     </ol>
                 </nav>
             </div>
-            <div>
-                @include('admin.partials.buttons.btn-edit', [
-                    'btnEditRoutePath' => route('admin.articles.edit', $article),
-                    'btnEditLabel' => 'Edit this article',
-                ])
-            </div>
+            @auth()
+                <div>
+                    @include('admin.partials.buttons.btn-edit', [
+                        'btnEditRoutePath' => route('admin.articles.edit', $article),
+                        'btnEditLabel' => 'Edit this article',
+                    ])
+                </div>
+            @endauth
         </div>
         <div class="row">
             <div class="col-md-12">

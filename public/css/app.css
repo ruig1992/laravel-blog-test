@@ -10924,7 +10924,7 @@ a.text-dark:focus {
   color: #f00;
 }
 
-.is-invalid .invalid-feedback {
+.admin-show-message .message-feedback {
   display: block;
 }
 

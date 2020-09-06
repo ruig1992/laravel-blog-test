@@ -2116,14 +2116,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      imageSrc: '',
-      imageRender: '',
-      withCache: true,
+      image: null,
+      cacheEnabled: true,
       searching: false,
-      errorMsg: ''
+      isError: false,
+      rspMessage: ''
     };
   },
   methods: {
@@ -2133,28 +2139,44 @@ __webpack_require__.r(__webpack_exports__);
       var query = document.getElementById('title').value.trim();
 
       if (!query) {
-        this.errorMsg = 'Enter the article title for query searching!';
+        this.setResponseMessage('Enter the article title for query searching!', true);
         return;
       }
 
       query = encodeURIComponent(query);
-      var cache = +this.withCache;
+      var cache = +this.cacheEnabled;
       var url = "/admin/services/random-image/search?q=".concat(query, "&cache=").concat(cache);
-      this.imageSrc = '';
-      this.errorMsg = '';
-      this.searching = true;
+      this.setSearchingMode();
       window.axios.get(url).then(function (response) {
-        _this.imageSrc = response.data.imageSrc;
-        _this.imageRender = response.data.imageRender;
+        _this.setImageData(response.data.image);
+
+        _this.setResponseMessage(response.data.msg);
+
         _this.searching = false;
       })["catch"](function (error) {
-        _this.imageSrc = '';
+        _this.setResponseMessage(error.response.data.error || 'Error! Image not found.', true);
+
         _this.searching = false;
-        _this.errorMsg = error.response.data.error || 'Error! Image not found.';
+
+        _this.setImageData();
       });
     },
     handleImageInsert: function handleImageInsert() {
-      this.$emit('insert-image', this.imageRender);
+      this.$emit('insert-image', this.image.render);
+    },
+    setImageData: function setImageData() {
+      var image = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.image = image;
+    },
+    setResponseMessage: function setResponseMessage(msg) {
+      var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      this.isError = !!error;
+      this.rspMessage = msg;
+    },
+    setSearchingMode: function setSearchingMode() {
+      this.searching = true;
+      this.setImageData();
+      this.setResponseMessage('');
     }
   }
 });
@@ -24608,35 +24630,35 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.withCache,
-              expression: "withCache"
+              value: _vm.cacheEnabled,
+              expression: "cacheEnabled"
             }
           ],
           staticClass: "form-check-input",
           attrs: { type: "checkbox", id: "with_cache" },
           domProps: {
-            checked: Array.isArray(_vm.withCache)
-              ? _vm._i(_vm.withCache, null) > -1
-              : _vm.withCache
+            checked: Array.isArray(_vm.cacheEnabled)
+              ? _vm._i(_vm.cacheEnabled, null) > -1
+              : _vm.cacheEnabled
           },
           on: {
             change: function($event) {
-              var $$a = _vm.withCache,
+              var $$a = _vm.cacheEnabled,
                 $$el = $event.target,
                 $$c = $$el.checked ? true : false
               if (Array.isArray($$a)) {
                 var $$v = null,
                   $$i = _vm._i($$a, $$v)
                 if ($$el.checked) {
-                  $$i < 0 && (_vm.withCache = $$a.concat([$$v]))
+                  $$i < 0 && (_vm.cacheEnabled = $$a.concat([$$v]))
                 } else {
                   $$i > -1 &&
-                    (_vm.withCache = $$a
+                    (_vm.cacheEnabled = $$a
                       .slice(0, $$i)
                       .concat($$a.slice($$i + 1)))
                 }
               } else {
-                _vm.withCache = $$c
+                _vm.cacheEnabled = $$c
               }
             }
           }
@@ -24651,10 +24673,10 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "random-image-search__img-preview-block" }, [
-      _vm.imageSrc
+      _vm.image
         ? _c("img", {
             staticClass: "random-image-search__img",
-            attrs: { src: _vm.imageSrc, alt: "Image" }
+            attrs: { src: _vm.image.src, alt: "Image" }
           })
         : !_vm.searching
         ? _c("div", { staticClass: "pt-1 text-center" }, [
@@ -24687,11 +24709,15 @@ var render = function() {
               _vm._v('No image? First find it - click "Search image"')
             ]),
             _vm._v(" "),
-            _c("p", { class: { "is-invalid": _vm.errorMsg } }, [
+            _c("p", { class: { "admin-show-message": _vm.rspMessage } }, [
               _c(
                 "span",
-                { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-                [_c("strong", [_vm._v(_vm._s(_vm.errorMsg))])]
+                {
+                  staticClass: "invalid-feedback message-feedback",
+                  class: { "text-info": !_vm.isError },
+                  attrs: { role: "alert" }
+                },
+                [_c("strong", [_vm._v(_vm._s(_vm.rspMessage))])]
               )
             ])
           ])
@@ -24712,7 +24738,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm.imageSrc
+      _vm.image
         ? _c(
             "button",
             {

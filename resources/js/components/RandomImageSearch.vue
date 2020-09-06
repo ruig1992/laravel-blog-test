@@ -15,14 +15,14 @@
                 <input type="checkbox"
                        class="form-check-input"
                        id="with_cache"
-                       v-model="withCache"
+                       v-model="cacheEnabled"
                 >
                 <label class="form-check-label" for="with_cache">With cache</label>
             </div>
         </div>
 
         <div class="random-image-search__img-preview-block">
-            <img v-if="imageSrc" class="random-image-search__img" :src="imageSrc" alt="Image">
+            <img v-if="image" class="random-image-search__img" :src="image.src" alt="Image">
 
             <div class="pt-1 text-center" v-else-if="!searching">
                 <p class="mb-2">
@@ -31,8 +31,14 @@
                     </svg>
                 </p>
                 <p class="text-muted">No image? First find it - click "Search image"</p>
-                <p :class="{'is-invalid': errorMsg}">
-                    <span role="alert" class="invalid-feedback"><strong>{{ errorMsg }}</strong></span>
+
+                <p :class="{'admin-show-message': rspMessage}">
+                    <span role="alert"
+                          class="invalid-feedback message-feedback"
+                          :class="{'text-info': !isError}"
+                    >
+                        <strong>{{ rspMessage }}</strong>
+                    </span>
                 </p>
             </div>
 
@@ -48,7 +54,7 @@
             <button type="button"
                     class="btn btn-primary d-flex align-items-center w-100"
                     @click="handleImageInsert"
-                    v-if="imageSrc"
+                    v-if="image"
             >
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
@@ -63,43 +69,53 @@
     export default {
         data() {
             return {
-                imageSrc: '',
-                imageRender: '',
-                withCache: true,
+                image: null,
+                cacheEnabled: true,
                 searching: false,
-                errorMsg: '',
+                isError: false,
+                rspMessage: '',
             };
         },
         methods: {
             handleImageSearch() {
                 let query = document.getElementById('title').value.trim();
                 if (!query) {
-                    this.errorMsg = 'Enter the article title for query searching!';
+                    this.setResponseMessage('Enter the article title for query searching!', true);
                     return;
                 }
 
                 query = encodeURIComponent(query);
-                const cache = +this.withCache;
+                const cache = +this.cacheEnabled;
                 const url = `/admin/services/random-image/search?q=${query}&cache=${cache}`;
 
-                this.imageSrc = '';
-                this.errorMsg = '';
-                this.searching = true;
+                this.setSearchingMode();
 
                 window.axios.get(url)
                     .then((response) => {
-                        this.imageSrc = response.data.imageSrc;
-                        this.imageRender = response.data.imageRender;
+                        this.setImageData(response.data.image);
+                        this.setResponseMessage(response.data.msg);
                         this.searching = false;
                     })
                     .catch((error) => {
-                        this.imageSrc = '';
+                        this.setResponseMessage(error.response.data.error || 'Error! Image not found.', true);
                         this.searching = false;
-                        this.errorMsg = error.response.data.error || 'Error! Image not found.';
+                        this.setImageData();
                     });
             },
             handleImageInsert() {
-                this.$emit('insert-image', this.imageRender);
+                this.$emit('insert-image', this.image.render);
+            },
+            setImageData(image = null) {
+                this.image = image;
+            },
+            setResponseMessage(msg, error = false) {
+                this.isError = !!error;
+                this.rspMessage = msg;
+            },
+            setSearchingMode() {
+                this.searching = true;
+                this.setImageData();
+                this.setResponseMessage('');
             },
         },
     }

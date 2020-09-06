@@ -35,7 +35,7 @@ class ImageSearchController extends Controller
         $cacheEnabled = $request->get('cache', null);
 
         if (!$query) {
-            return response()->json(['imageSrc' => null, 'imageRender' => null]);
+            return response()->json(['msg' => 'No images found for this article title...']);
         }
 
         try {
@@ -48,7 +48,7 @@ class ImageSearchController extends Controller
             return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
 
-        return response()->json(['imageSrc' => $imageSrc, 'imageRender' => $imageRender]);
+        return response()->json(['image' => ['src' => $imageSrc, 'render' => $imageRender]]);
     }
 
     /**
@@ -60,6 +60,6 @@ class ImageSearchController extends Controller
      */
     private function getImageRender(string $imageSrc): string
     {
-        return view('blog.partials.content-image', ['imageSrc' => $imageSrc])->render();
+        return trim(view('blog.partials.content-image', ['imageSrc' => $imageSrc])->render());
     }
 }

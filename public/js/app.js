@@ -6618,7 +6618,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 370px;\n    min-height: 270px;\n    margin: 0 3rem;\n    text-align: center;\n    overflow: hidden;\n}\n.random-image-search__img[data-v-82877976] {\n    max-height: 200px;\n    width: auto;\n}\n", ""]);
+exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    min-height: 270px;\n    text-align: center;\n}\n.random-image-search__img[data-v-82877976] {\n    max-height: 200px;\n    width: auto;\n}\n.random-image-search__cover[data-v-82877976] {\n    width: 370px;\n    padding: .5rem;\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -24582,214 +24582,228 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "random-image-search d-flex" }, [
-    _c("div", [
+  return _c(
+    "div",
+    {
+      staticClass:
+        "random-image-search d-flex flex-wrap justify-content-between justify-content-lg-start"
+    },
+    [
+      _c("div", [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary d-flex align-items-center",
+            attrs: { type: "button" },
+            on: { click: _vm.handleImageSearch }
+          },
+          [
+            _c(
+              "svg",
+              {
+                staticClass: "bi bi-search",
+                attrs: {
+                  width: "1em",
+                  height: "1em",
+                  viewBox: "0 0 16 16",
+                  fill: "currentColor",
+                  xmlns: "http://www.w3.org/2000/svg"
+                }
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    "fill-rule": "evenodd",
+                    d:
+                      "M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
+                  }
+                }),
+                _vm._v(" "),
+                _c("path", {
+                  attrs: {
+                    "fill-rule": "evenodd",
+                    d:
+                      "M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-2" }, [_vm._v("Search image")])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check mt-3 ml-1" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.cacheEnabled,
+                expression: "cacheEnabled"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "with_cache" },
+            domProps: {
+              checked: Array.isArray(_vm.cacheEnabled)
+                ? _vm._i(_vm.cacheEnabled, null) > -1
+                : _vm.cacheEnabled
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.cacheEnabled,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.cacheEnabled = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.cacheEnabled = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.cacheEnabled = $$c
+                }
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "with_cache" } },
+            [_vm._v("Enable cache")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "order-md-3 ml-md-auto ml-lg-0" }, [
+        _vm.image
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary d-flex align-items-center",
+                attrs: { type: "button" },
+                on: { click: _vm.handleImageInsert }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "bi bi-arrow-90deg-up",
+                    attrs: {
+                      width: "1em",
+                      height: "1em",
+                      viewBox: "0 0 16 16",
+                      fill: "currentColor",
+                      xmlns: "http://www.w3.org/2000/svg"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "fill-rule": "evenodd",
+                        d:
+                          "M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "ml-2" }, [_vm._v("Insert image")])
+              ]
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
       _c(
-        "button",
+        "div",
         {
-          staticClass: "btn btn-secondary d-flex align-items-center w-100",
-          attrs: { type: "button" },
-          on: { click: _vm.handleImageSearch }
+          staticClass:
+            "random-image-search__img-preview-block mx-auto mx-md-5 mt-4 mt-md-0"
         },
         [
-          _c(
-            "svg",
-            {
-              staticClass: "bi bi-search",
-              attrs: {
-                width: "1em",
-                height: "1em",
-                viewBox: "0 0 16 16",
-                fill: "currentColor",
-                xmlns: "http://www.w3.org/2000/svg"
-              }
-            },
-            [
-              _c("path", {
-                attrs: {
-                  "fill-rule": "evenodd",
-                  d:
-                    "M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"
-                }
-              }),
-              _vm._v(" "),
-              _c("path", {
-                attrs: {
-                  "fill-rule": "evenodd",
-                  d:
-                    "M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml-2" }, [_vm._v("Search image")])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-check mt-3 ml-1" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.cacheEnabled,
-              expression: "cacheEnabled"
-            }
-          ],
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", id: "with_cache" },
-          domProps: {
-            checked: Array.isArray(_vm.cacheEnabled)
-              ? _vm._i(_vm.cacheEnabled, null) > -1
-              : _vm.cacheEnabled
-          },
-          on: {
-            change: function($event) {
-              var $$a = _vm.cacheEnabled,
-                $$el = $event.target,
-                $$c = $$el.checked ? true : false
-              if (Array.isArray($$a)) {
-                var $$v = null,
-                  $$i = _vm._i($$a, $$v)
-                if ($$el.checked) {
-                  $$i < 0 && (_vm.cacheEnabled = $$a.concat([$$v]))
-                } else {
-                  $$i > -1 &&
-                    (_vm.cacheEnabled = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
-                }
-              } else {
-                _vm.cacheEnabled = $$c
-              }
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "with_cache" } },
-          [_vm._v("Enable cache")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "random-image-search__img-preview-block" }, [
-      _vm.image
-        ? _c("div", [
-            _c("img", {
-              staticClass: "random-image-search__img",
-              attrs: { src: _vm.image.src, alt: "Image" }
-            }),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        : !_vm.searching
-        ? _c("div", { staticClass: "pt-1 text-center" }, [
-            _c("p", { staticClass: "mb-2" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "bi bi-card-image",
-                  attrs: {
-                    width: "3em",
-                    height: "3em",
-                    viewBox: "0 0 16 16",
-                    fill: "currentColor",
-                    xmlns: "http://www.w3.org/2000/svg"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "fill-rule": "evenodd",
-                      d:
-                        "M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-muted" }, [
-              _vm._v('No image? First find it - click "Search image"')
-            ]),
-            _vm._v(" "),
-            _c("p", { class: { "admin-show-message": _vm.rspMessage } }, [
-              _c(
-                "span",
-                {
-                  staticClass: "invalid-feedback message-feedback",
-                  class: { "text-info": !_vm.isError },
-                  attrs: { role: "alert" }
-                },
-                [_c("strong", [_vm._v(_vm._s(_vm.rspMessage))])]
-              )
-            ])
-          ])
-        : _c(
-            "div",
-            {
-              staticClass:
-                "d-flex flex-column align-items-center justify-content-center p-2"
-            },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("span", { staticClass: "mt-2 text-muted" }, [
-                _vm._v("Searching...")
+          _vm.image
+            ? _c("div", [
+                _c("img", {
+                  staticClass: "random-image-search__img",
+                  attrs: { src: _vm.image.src, alt: "Image" }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
               ])
-            ]
-          )
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _vm.image
-        ? _c(
-            "button",
-            {
-              staticClass: "btn btn-primary d-flex align-items-center w-100",
-              attrs: { type: "button" },
-              on: { click: _vm.handleImageInsert }
-            },
-            [
-              _c(
-                "svg",
+            : !_vm.searching
+            ? _c("div", { staticClass: "random-image-search__cover" }, [
+                _c("p", { staticClass: "mb-2" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "bi bi-card-image",
+                      attrs: {
+                        width: "3em",
+                        height: "3em",
+                        viewBox: "0 0 16 16",
+                        fill: "currentColor",
+                        xmlns: "http://www.w3.org/2000/svg"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d:
+                            "M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-muted" }, [
+                  _vm._v('No image? First find it - click "Search image"')
+                ]),
+                _vm._v(" "),
+                _c("p", { class: { "admin-show-message": _vm.rspMessage } }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "invalid-feedback message-feedback",
+                      class: { "text-info": !_vm.isError },
+                      attrs: { role: "alert" }
+                    },
+                    [_c("strong", [_vm._v(_vm._s(_vm.rspMessage))])]
+                  )
+                ])
+              ])
+            : _c(
+                "div",
                 {
-                  staticClass: "bi bi-arrow-90deg-up",
-                  attrs: {
-                    width: "1em",
-                    height: "1em",
-                    viewBox: "0 0 16 16",
-                    fill: "currentColor",
-                    xmlns: "http://www.w3.org/2000/svg"
-                  }
+                  staticClass:
+                    "random-image-search__cover d-flex flex-column align-items-center justify-content-center"
                 },
                 [
-                  _c("path", {
-                    attrs: {
-                      "fill-rule": "evenodd",
-                      d:
-                        "M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"
-                    }
-                  })
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "mt-2 text-muted" }, [
+                    _vm._v("Searching...")
+                  ])
                 ]
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "ml-2" }, [_vm._v("Insert image")])
-            ]
-          )
-        : _vm._e()
-    ])
-  ])
+              )
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted mt-2" }, [
+    return _c("p", { staticClass: "text-muted mt-3" }, [
       _vm._v("Didn't find what you were looking for - "),
       _c("br"),
       _vm._v('click "Search image" again')

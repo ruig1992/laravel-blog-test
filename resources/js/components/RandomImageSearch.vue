@@ -1,8 +1,8 @@
 <template>
-    <div class="random-image-search d-flex">
+    <div class="random-image-search d-flex flex-wrap justify-content-between justify-content-lg-start">
         <div>
             <button type="button"
-                    class="btn btn-secondary d-flex align-items-center w-100"
+                    class="btn btn-secondary d-flex align-items-center"
                     @click="handleImageSearch"
             >
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -21,13 +21,26 @@
             </div>
         </div>
 
-        <div class="random-image-search__img-preview-block">
+        <div class="order-md-3 ml-md-auto ml-lg-0">
+            <button type="button"
+                    class="btn btn-primary d-flex align-items-center"
+                    @click="handleImageInsert"
+                    v-if="image"
+            >
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
+                </svg>
+                <span class="ml-2">Insert image</span>
+            </button>
+        </div>
+
+        <div class="random-image-search__img-preview-block mx-auto mx-md-5 mt-4 mt-md-0">
             <div v-if="image">
                 <img class="random-image-search__img" :src="image.src" alt="Image">
-                <p class="text-muted mt-2">Didn't find what you were looking for - <br>click "Search image" again</p>
+                <p class="text-muted mt-3">Didn't find what you were looking for - <br>click "Search image" again</p>
             </div>
 
-            <div class="pt-1 text-center" v-else-if="!searching">
+            <div class="random-image-search__cover" v-else-if="!searching">
                 <p class="mb-2">
                     <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-card-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
@@ -45,25 +58,12 @@
                 </p>
             </div>
 
-            <div v-else class="d-flex flex-column align-items-center justify-content-center p-2">
+            <div v-else class="random-image-search__cover d-flex flex-column align-items-center justify-content-center">
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Searching...</span>
                 </div>
                 <span class="mt-2 text-muted">Searching...</span>
             </div>
-        </div>
-
-        <div>
-            <button type="button"
-                    class="btn btn-primary d-flex align-items-center w-100"
-                    @click="handleImageInsert"
-                    v-if="image"
-            >
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
-                </svg>
-                <span class="ml-2">Insert image</span>
-            </button>
         </div>
     </div>
 </template>
@@ -126,14 +126,16 @@
 
 <style scoped>
 .random-image-search__img-preview-block {
-    width: 370px;
     min-height: 270px;
-    margin: 0 3rem;
     text-align: center;
-    overflow: hidden;
 }
 .random-image-search__img {
     max-height: 200px;
     width: auto;
+}
+.random-image-search__cover {
+    width: 370px;
+    padding: .5rem;
+    text-align: center;
 }
 </style>

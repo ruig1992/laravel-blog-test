@@ -32,10 +32,12 @@
                             @foreach($articles as $article)
                                 <tr>
                                     <td>
-                                        <div class="d-flex">
-                                            @include('admin.partials.buttons.btn-view-small', [
-                                                'btnViewRoutePath' => route('blog.show', $article->slug),
-                                            ])
+                                        <div class="d-flex justify-content-end">
+                                            @if($article->is_published)
+                                                @include('admin.partials.buttons.btn-view-small', [
+                                                    'btnViewRoutePath' => route('blog.show', $article->slug),
+                                                ])
+                                            @endif
                                             @include('admin.partials.buttons.btn-edit-small', [
                                                 'btnEditRoutePath' => route('admin.articles.edit', $article),
                                             ])

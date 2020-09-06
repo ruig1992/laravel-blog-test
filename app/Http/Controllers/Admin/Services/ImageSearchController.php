@@ -31,6 +31,10 @@ class ImageSearchController extends Controller
      */
     public function search(Request $request): JsonResponse
     {
+        if (!$request->ajax()) {
+            abort(404);
+        }
+
         $query = $request->get('q');
         $cacheEnabled = $request->get('cache', null);
 

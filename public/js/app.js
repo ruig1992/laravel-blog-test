@@ -1969,11 +1969,8 @@ __webpack_require__.r(__webpack_exports__);
 
       return this.value;
     },
-    insertImage: function insertImage(imageUrl) {
-      this.currentValue = this.renderImage(imageUrl) + this.currentValue;
-    },
-    renderImage: function renderImage(imageUrl) {
-      return "<p class=\"blog-img-responsive\"><img src=\"".concat(imageUrl, "\" class=\"img-fluid\" alt=\"Inserted random image\"></p>");
+    insertImage: function insertImage(imageRender) {
+      this.currentValue = imageRender + this.currentValue;
     }
   }
 });
@@ -2103,27 +2100,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {},
   data: function data() {
     return {
-      imageUrl: '',
-      searching: false
+      imageSrc: '',
+      imageRender: '',
+      withCache: true,
+      searching: false,
+      errorMsg: ''
     };
   },
   methods: {
     handleImageSearch: function handleImageSearch() {
       var _this = this;
 
-      this.imageUrl = '';
+      var query = document.getElementById('title').value.trim();
+
+      if (!query) {
+        this.errorMsg = 'Enter the article title for query searching!';
+        return;
+      }
+
+      query = encodeURIComponent(query);
+      var cache = +this.withCache;
+      var url = "/admin/services/random-image/search?q=".concat(query, "&cache=").concat(cache);
+      this.imageSrc = '';
+      this.errorMsg = '';
       this.searching = true;
-      setTimeout(function () {
-        _this.imageUrl = 'https://www.cloudways.com/blog/wp-content/uploads/install-laravel-3.jpg';
+      window.axios.get(url).then(function (response) {
+        _this.imageSrc = response.data.imageSrc;
+        _this.imageRender = response.data.imageRender;
         _this.searching = false;
-      }, 2000);
+      })["catch"](function (error) {
+        _this.imageSrc = '';
+        _this.searching = false;
+        _this.errorMsg = error.response.data.error || 'Error! Image not found.';
+      });
     },
     handleImageInsert: function handleImageInsert() {
-      this.$emit('insert-image', this.imageUrl);
+      this.$emit('insert-image', this.imageRender);
     }
   }
 });
@@ -6562,7 +6593,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 300px;\n    min-height: 170px;\n    margin-left: 3rem;\n}\n", ""]);
+exports.push([module.i, "\n.random-image-search__img-preview-block[data-v-82877976] {\n    width: 370px;\n    min-height: 200px;\n    margin: 0 3rem;\n    text-align: center;\n    overflow: hidden;\n}\n.random-image-search__img[data-v-82877976] {\n    max-height: 200px;\n    width: auto;\n}\n", ""]);
 
 // exports
 
@@ -24527,7 +24558,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "random-image-search d-flex" }, [
-    _c("div", { staticClass: "random-image-search__buttons" }, [
+    _c("div", [
       _c(
         "button",
         {
@@ -24571,12 +24602,121 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.imageUrl
+      _c("div", { staticClass: "form-check mt-3 ml-1" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.withCache,
+              expression: "withCache"
+            }
+          ],
+          staticClass: "form-check-input",
+          attrs: { type: "checkbox", id: "with_cache" },
+          domProps: {
+            checked: Array.isArray(_vm.withCache)
+              ? _vm._i(_vm.withCache, null) > -1
+              : _vm.withCache
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.withCache,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.withCache = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.withCache = $$a
+                      .slice(0, $$i)
+                      .concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.withCache = $$c
+              }
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "form-check-label", attrs: { for: "with_cache" } },
+          [_vm._v("With cache")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "random-image-search__img-preview-block" }, [
+      _vm.imageSrc
+        ? _c("img", {
+            staticClass: "random-image-search__img",
+            attrs: { src: _vm.imageSrc, alt: "Image" }
+          })
+        : !_vm.searching
+        ? _c("div", { staticClass: "pt-1 text-center" }, [
+            _c("p", { staticClass: "mb-2" }, [
+              _c(
+                "svg",
+                {
+                  staticClass: "bi bi-card-image",
+                  attrs: {
+                    width: "3em",
+                    height: "3em",
+                    viewBox: "0 0 16 16",
+                    fill: "currentColor",
+                    xmlns: "http://www.w3.org/2000/svg"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      "fill-rule": "evenodd",
+                      d:
+                        "M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-muted" }, [
+              _vm._v('No image? First find it - click "Search image"')
+            ]),
+            _vm._v(" "),
+            _c("p", { class: { "is-invalid": _vm.errorMsg } }, [
+              _c(
+                "span",
+                { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+                [_c("strong", [_vm._v(_vm._s(_vm.errorMsg))])]
+              )
+            ])
+          ])
+        : _c(
+            "div",
+            {
+              staticClass:
+                "d-flex flex-column align-items-center justify-content-center p-2"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("span", { staticClass: "mt-2 text-muted" }, [
+                _vm._v("Searching...")
+              ])
+            ]
+          )
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _vm.imageSrc
         ? _c(
             "button",
             {
-              staticClass:
-                "btn btn-primary d-flex align-items-center mt-2 w-100",
+              staticClass: "btn btn-primary d-flex align-items-center w-100",
               attrs: { type: "button" },
               on: { click: _vm.handleImageInsert }
             },
@@ -24608,59 +24748,6 @@ var render = function() {
             ]
           )
         : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "random-image-search__img-preview-block" }, [
-      _vm.imageUrl
-        ? _c("img", {
-            staticClass: "img-fluid",
-            attrs: { src: _vm.imageUrl, alt: "Image" }
-          })
-        : !_vm.searching
-        ? _c("div", { staticClass: "pt-1 text-center" }, [
-            _c("p", { staticClass: "mb-2" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "bi bi-card-image",
-                  attrs: {
-                    width: "3em",
-                    height: "3em",
-                    viewBox: "0 0 16 16",
-                    fill: "currentColor",
-                    xmlns: "http://www.w3.org/2000/svg"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "fill-rule": "evenodd",
-                      d:
-                        "M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-muted" }, [
-              _vm._v('No image? First find it - click "Search image"')
-            ])
-          ])
-        : _c(
-            "div",
-            {
-              staticClass:
-                "d-flex flex-column align-items-center justify-content-center p-2"
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("span", { staticClass: "mt-2 text-muted" }, [
-                _vm._v("Searching...")
-              ])
-            ]
-          )
     ])
   ])
 }

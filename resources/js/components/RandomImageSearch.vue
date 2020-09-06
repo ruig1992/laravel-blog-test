@@ -1,6 +1,6 @@
 <template>
     <div class="random-image-search d-flex">
-        <div class="random-image-search__buttons">
+        <div>
             <button type="button"
                     class="btn btn-secondary d-flex align-items-center w-100"
                     @click="handleImageSearch"
@@ -11,20 +11,19 @@
                 </svg>
                 <span class="ml-2">Search image</span>
             </button>
-            <button type="button"
-                    class="btn btn-primary d-flex align-items-center mt-2 w-100"
-                    @click="handleImageInsert"
-                    v-if="imageUrl"
-            >
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
-                </svg>
-                <span class="ml-2">Insert image</span>
-            </button>
+            <div class="form-check mt-3 ml-1">
+                <input type="checkbox"
+                       class="form-check-input"
+                       id="with_cache"
+                       v-model="withCache"
+                >
+                <label class="form-check-label" for="with_cache">With cache</label>
+            </div>
         </div>
 
         <div class="random-image-search__img-preview-block">
-            <img v-if="imageUrl" class="img-fluid" :src="imageUrl" alt="Image">
+            <img v-if="imageSrc" class="random-image-search__img" :src="imageSrc" alt="Image">
+
             <div class="pt-1 text-center" v-else-if="!searching">
                 <p class="mb-2">
                     <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-card-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +31,11 @@
                     </svg>
                 </p>
                 <p class="text-muted">No image? First find it - click "Search image"</p>
+                <p :class="{'is-invalid': errorMsg}">
+                    <span role="alert" class="invalid-feedback"><strong>{{ errorMsg }}</strong></span>
+                </p>
             </div>
+
             <div v-else class="d-flex flex-column align-items-center justify-content-center p-2">
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Searching...</span>
@@ -40,29 +43,63 @@
                 <span class="mt-2 text-muted">Searching...</span>
             </div>
         </div>
+
+        <div>
+            <button type="button"
+                    class="btn btn-primary d-flex align-items-center w-100"
+                    @click="handleImageInsert"
+                    v-if="imageSrc"
+            >
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
+                </svg>
+                <span class="ml-2">Insert image</span>
+            </button>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: {},
         data() {
             return {
-                imageUrl: '',
+                imageSrc: '',
+                imageRender: '',
+                withCache: true,
                 searching: false,
+                errorMsg: '',
             };
         },
         methods: {
             handleImageSearch() {
-                this.imageUrl = '';
+                let query = document.getElementById('title').value.trim();
+                if (!query) {
+                    this.errorMsg = 'Enter the article title for query searching!';
+                    return;
+                }
+
+                query = encodeURIComponent(query);
+                const cache = +this.withCache;
+                const url = `/admin/services/random-image/search?q=${query}&cache=${cache}`;
+
+                this.imageSrc = '';
+                this.errorMsg = '';
                 this.searching = true;
-                setTimeout(() => {
-                    this.imageUrl = 'https://www.cloudways.com/blog/wp-content/uploads/install-laravel-3.jpg';
-                    this.searching = false;
-                }, 2000);
+
+                window.axios.get(url)
+                    .then((response) => {
+                        this.imageSrc = response.data.imageSrc;
+                        this.imageRender = response.data.imageRender;
+                        this.searching = false;
+                    })
+                    .catch((error) => {
+                        this.imageSrc = '';
+                        this.searching = false;
+                        this.errorMsg = error.response.data.error || 'Error! Image not found.';
+                    });
             },
             handleImageInsert() {
-                this.$emit('insert-image', this.imageUrl);
+                this.$emit('insert-image', this.imageRender);
             },
         },
     }
@@ -70,8 +107,14 @@
 
 <style scoped>
 .random-image-search__img-preview-block {
-    width: 300px;
-    min-height: 170px;
-    margin-left: 3rem;
+    width: 370px;
+    min-height: 200px;
+    margin: 0 3rem;
+    text-align: center;
+    overflow: hidden;
+}
+.random-image-search__img {
+    max-height: 200px;
+    width: auto;
 }
 </style>

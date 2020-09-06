@@ -37,11 +37,8 @@ export default {
             }
             return this.value;
         },
-        insertImage(imageUrl) {
-            this.currentValue = this.renderImage(imageUrl) + this.currentValue;
-        },
-        renderImage(imageUrl) {
-            return `<p class="blog-img-responsive"><img src="${imageUrl}" class="img-fluid" alt="Inserted random image"></p>`;
+        insertImage(imageRender) {
+            this.currentValue = imageRender + this.currentValue;
         },
     },
 }

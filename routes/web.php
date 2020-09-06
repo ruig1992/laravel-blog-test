@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
@@ -20,4 +21,6 @@ Route::middleware('auth')
 
         Route::resource('articles', 'ArticleController');
         Route::resource('categories', 'CategoryController');
+
+        Route::get('/services/random-image/search', 'Services\ImageSearchController@search');
     });

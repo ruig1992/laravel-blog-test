@@ -15,6 +15,9 @@
     margin: 2rem auto;
     text-align: center;
 }
+.blog-img-responsive img {
+    max-height: 450px;
+}
 .admin-table-hover tbody tr:hover {
     background-color: rgba(216, 186, 3, .2);
 }
@@ -22,4 +25,7 @@
     content: "*";
     margin-left: 2px;
     color: #f00;
+}
+.is-invalid .invalid-feedback {
+    display: block;
 }

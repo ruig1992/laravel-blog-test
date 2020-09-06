@@ -17,7 +17,7 @@
                     </ol>
                 </nav>
             </div>
-            @auth()
+            @auth
                 <div>
                     @include('admin.partials.buttons.btn-edit', [
                         'btnEditRoutePath' => route('admin.articles.edit', $article),

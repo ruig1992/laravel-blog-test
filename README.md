@@ -36,3 +36,13 @@ After that run ```php artisan serve``` and open in the browser http://localhost:
 For login as **Blog user** open http://localhost:8000/login and in the Login form enter:
 
 login - *test@test.com* and password - *password*
+
+---
+
+P.S.: the third task uses Google Custom Search API with credentials - Search Engine ID and Google API key. The credentials specified in the config are required for the demo test.
+
+For creation own Search Engine ID you have to go to https://cse.google.com/cse
+
+For generation API key you have to go to https://console.developers.google.com
+
+**Attention!** Max quota for Google Custom Search API free usage - 100 requests per 1 day

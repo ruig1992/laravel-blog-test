@@ -39,7 +39,7 @@ login - *test@test.com* and password - *password*
 
 ---
 
-P.S.: the third task uses Google Custom Search API with credentials - Search Engine ID and Google API key. The credentials specified in the config are required for the demo test.
+P.S.: the third task uses Google Custom Search API with credentials - Search Engine ID and Google API key. The credentials specified in the *.env.example* file are required for the demo test.
 
 For creation own Search Engine ID you have to go to https://cse.google.com/cse
 
